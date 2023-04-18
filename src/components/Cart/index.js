@@ -7,10 +7,13 @@ import CartContext from '../../context/CartContext'
 import Header from '../Header'
 import CartListView from '../CartListView'
 import EmptyCartView from '../EmptyCartView'
+import CartTotal from '../CartTotal'
 
 import 'reactjs-popup/dist/index.css'
 
 import './index.css'
+
+const contentStyle = {borderRadius: '10px'}
 
 const Cart = () => (
   <CartContext.Consumer>
@@ -34,10 +37,11 @@ const Cart = () => (
                   <div className="popup-container">
                     <Popup
                       modal
+                      {...{contentStyle}}
                       trigger={
                         <button type="button" className="remove-all-button">
                           <div className="cartDiv">
-                            <MdRemoveShoppingCart size={30} color="#0967d2" />
+                            <MdRemoveShoppingCart size={20} color="#0967d2" />
                           </div>
                           <p className="remove-all">Remove All</p>
                         </button>
@@ -70,6 +74,7 @@ const Cart = () => (
                   </div>
                 </div>
                 <CartListView />
+                <CartTotal />
               </div>
             </div>
           )}

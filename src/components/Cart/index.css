@@ -15,6 +15,13 @@
   font-weight: 500;
   letter-spacing: -1px;
 }
+
+@media screen and (max-width: 768px) {
+  .remove-all {
+    font-size: 15px;
+  }
+}
+
 .cartDiv {
   display: flex;
   align-items: center;
@@ -95,7 +102,9 @@
   align-items: center;
   padding: 10px;
 }
-
+.test {
+  background-color: green;
+}
 .model-buttons {
   width: 70%;
   display: flex;

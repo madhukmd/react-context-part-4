@@ -280,3 +280,36 @@
     font-size: 48px;
   }
 }
+.carted-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  width: 50%;
+  padding: 20px;
+  border-radius: 10px;
+}
+.cart-icon {
+  height: 50px;
+  width: 50px;
+}
+.success-cart-heading {
+  font-family: 'Roboto';
+  font-weight: bold;
+}
+.see-in-your-cart {
+  font-family: 'Roboto';
+  font-weight: 500;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -10,6 +10,8 @@ import SimilarProductItem from '../SimilarProductItem'
 
 import './index.css'
 
+const success = 'https://assets.ccbp.in/frontend/react-js/success-icon-img.png'
+
 const apiStatusConstants = {
   initial: 'INITIAL',
   success: 'SUCCESS',
@@ -23,10 +25,15 @@ class ProductItemDetails extends Component {
     similarProductsData: [],
     apiStatus: apiStatusConstants.initial,
     quantity: 1,
+    carted: false,
   }
 
   componentDidMount() {
     this.getProductData()
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('onclick', this.outsideClick)
   }
 
   getFormattedData = data => ({
@@ -108,10 +115,24 @@ class ProductItemDetails extends Component {
     this.setState(prevState => ({quantity: prevState.quantity + 1}))
   }
 
+  modal = () => (
+    <div className="modal" id="modal">
+      <div className="carted-container">
+        <img src={success} alt="success" className="cart-icon" />
+        <p className="success-cart-heading">carted Successfully!!</p>
+        <p className="see-in-your-cart">See in your Cart</p>
+      </div>
+    </div>
+  )
+
+  modalUp = () => {
+    this.setState({carted: true})
+  }
+
   renderProductDetailsView = () => (
     <CartContext.Consumer>
       {value => {
-        const {productData, quantity, similarProductsData} = this.state
+        const {productData, quantity, similarProductsData, carted} = this.state
         const {
           availability,
           brand,
@@ -125,6 +146,7 @@ class ProductItemDetails extends Component {
         const {addCartItem} = value
         const onClickAddToCart = () => {
           addCartItem({...productData, quantity})
+          this.modalUp()
         }
 
         return (
@@ -190,11 +212,19 @@ class ProductItemDetails extends Component {
                 />
               ))}
             </ul>
+            {carted && this.modal()}
           </div>
         )
       }}
     </CartContext.Consumer>
   )
+
+  outsideClick = event => {
+    const strike = document.getElementById('modal')
+    if (event.target === strike) {
+      this.setState({carted: false})
+    }
+  }
 
   renderProductDetails = () => {
     const {apiStatus} = this.state
@@ -212,6 +242,7 @@ class ProductItemDetails extends Component {
   }
 
   render() {
+    window.onclick = this.outsideClick
     return (
       <>
         <Header />
